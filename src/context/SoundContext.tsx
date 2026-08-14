@@ -9,6 +9,7 @@ interface SoundContextType {
   playSound: (type: 'hover' | 'click' | 'splice' | 'success' | 'tab') => void;
 }
 
+const defaultSoundSettings: SoundSettings = { isMuted: false, volume: 0.15 };
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -17,7 +18,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { /* fallback */ }
     }
-    return { isMuted: false, volume: 0.15 };
+    return defaultSoundSettings;
   });
 
   useEffect(() => {
@@ -45,6 +46,13 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
 export const useSound = () => {
   const context = useContext(SoundContext);
-  if (!context) throw new Error('useSound must be used within a SoundProvider');
+  if (!context) {
+    return {
+      settings: defaultSoundSettings,
+      toggleMute: () => {},
+      setVolume: () => {},
+      playSound: () => {},
+    };
+  }
   return context;
 };

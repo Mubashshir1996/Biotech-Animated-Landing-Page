@@ -29,42 +29,28 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   useEffect(() => {
-    // Detect OS reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mediaQuery.matches) {
       setSettings(prev => ({ ...prev, reducedMotion: true }));
     }
-
     const handleChange = (e: MediaQueryListEvent) => {
       setSettings(prev => ({ ...prev, reducedMotion: e.matches }));
     };
-
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   useEffect(() => {
     localStorage.setItem('aetheria_acc_settings', JSON.stringify(settings));
-    
-    // Apply document level classes
     const root = document.documentElement;
-    if (settings.highContrast) {
-      root.classList.add('high-contrast');
-    } else {
-      root.classList.remove('high-contrast');
-    }
+    if (settings.highContrast) root.classList.add('high-contrast');
+    else root.classList.remove('high-contrast');
 
-    if (settings.largeText) {
-      root.style.fontSize = '18px';
-    } else {
-      root.style.fontSize = '';
-    }
+    if (settings.largeText) root.style.fontSize = '18px';
+    else root.style.fontSize = '';
 
-    if (settings.dyslexicFont) {
-      root.classList.add('font-dyslexic');
-    } else {
-      root.classList.remove('font-dyslexic');
-    }
+    if (settings.dyslexicFont) root.classList.add('font-dyslexic');
+    else root.classList.remove('font-dyslexic');
   }, [settings]);
 
   const toggleReducedMotion = () => setSettings(prev => ({ ...prev, reducedMotion: !prev.reducedMotion }));
@@ -92,7 +78,14 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);
   if (!context) {
-    throw new Error('useAccessibility must be used within an AccessibilityProvider');
+    return {
+      settings: defaultSettings,
+      toggleReducedMotion: () => {},
+      toggleHighContrast: () => {},
+      toggleLargeText: () => {},
+      toggleDyslexicFont: () => {},
+      resetSettings: () => {},
+    };
   }
   return context;
 };

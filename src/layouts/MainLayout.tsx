@@ -1,13 +1,11 @@
 import React from 'react';
-import { AccessibilityProvider } from '../context/AccessibilityContext';
-import { SoundProvider } from '../context/SoundContext';
 import { useLenis } from '../hooks/useLenis';
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
-const MainLayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   useLenis();
 
   return (
@@ -16,15 +14,5 @@ const MainLayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }
         {children}
       </main>
     </div>
-  );
-};
-
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  return (
-    <AccessibilityProvider>
-      <SoundProvider>
-        <MainLayoutContent>{children}</MainLayoutContent>
-      </SoundProvider>
-    </AccessibilityProvider>
   );
 };
