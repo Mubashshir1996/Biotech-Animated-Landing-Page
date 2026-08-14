@@ -1,4 +1,4 @@
-import { useAccessibility } from '../context/AccessibilityContext';
+import { useAccessibility } from './useAccessibility';
 
 export const useReducedMotion = () => {
   const { settings } = useAccessibility();

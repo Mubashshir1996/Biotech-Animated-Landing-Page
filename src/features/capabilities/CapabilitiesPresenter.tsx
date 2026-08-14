@@ -11,7 +11,7 @@ interface CapabilitiesPresenterProps {
   onSelectCapability: (cap: CapabilityItem) => void;
 }
 
-const CapabilityCardBase: React.FC<{ item: CapabilityItem; onClick: () => void }> = ({ item, onClick }) => {
+const CapabilityCardBase: React.FC<{ item: CapabilityItem; onClick: () => void }> = React.memo(({ item, onClick }) => {
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'target': return <Target className="w-6 h-6 text-bio-glow" />;
@@ -22,10 +22,20 @@ const CapabilityCardBase: React.FC<{ item: CapabilityItem; onClick: () => void }
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <div
+    <button
+      type="button"
       onClick={onClick}
-      className="p-8 flex flex-col justify-between h-full cursor-pointer min-h-[340px]"
+      onKeyDown={handleKeyDown}
+      aria-label={`Inspect capability details for ${item.title}`}
+      className="w-full text-left p-8 flex flex-col justify-between h-full cursor-pointer min-h-[340px] focus:outline-none focus-visible:ring-2 focus-visible:ring-bio-glow rounded-2xl"
     >
       <div>
         <div className="flex items-center justify-between mb-6">
@@ -47,17 +57,19 @@ const CapabilityCardBase: React.FC<{ item: CapabilityItem; onClick: () => void }
         </p>
       </div>
 
-      <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+      <div className="pt-6 border-t border-white/10 flex items-center justify-between w-full">
         <span className="text-xs font-mono text-slate-400 uppercase">Performance Metric</span>
         <span className="text-sm font-mono font-bold text-emerald-400">{item.metrics}</span>
       </div>
-    </div>
+    </button>
   );
-};
+});
+
+CapabilityCardBase.displayName = 'CapabilityCardBase';
 
 const EnhancedCapabilityCard = withGlassmorphicCard(CapabilityCardBase);
 
-const CapabilitiesPresenterBase: React.FC<CapabilitiesPresenterProps> = ({
+const CapabilitiesPresenterBase: React.FC<CapabilitiesPresenterProps> = React.memo(({
   capabilities,
   onSelectCapability,
 }) => {
@@ -80,6 +92,8 @@ const CapabilitiesPresenterBase: React.FC<CapabilitiesPresenterProps> = ({
       </div>
     </SectionLayout>
   );
-};
+});
+
+CapabilitiesPresenterBase.displayName = 'CapabilitiesPresenterBase';
 
 export const CapabilitiesPresenter = withScrollReveal(CapabilitiesPresenterBase, { direction: 'up' });

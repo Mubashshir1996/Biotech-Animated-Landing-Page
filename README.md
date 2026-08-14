@@ -1,10 +1,10 @@
-# 🧬 AETHERIA BIO — Quantum Genomics & Synthetic Biology Platform
+# AETHERIA BIO - Quantum Genomics & Synthetic Biology Platform
 
 > **A Premium, Animation-Driven Biotechnology Landing Page** built with Next-Generation Frontend Architecture, 3D WebGL Canvas Visualizations, Web Audio API Sound Feedback, and WCAG 2.1 AA Accessibility Standards.
 
 ---
 
-## 🌟 Overview & Design Philosophy
+## Overview & Design Philosophy
 
 **AETHERIA BIO** is a flagship biotechnology landing page showcasing cutting-edge computational genomics, targeted CRISPR Cas13 gene editing, and de novo AI protein folding. Designed for enterprise pharmaceutical partners and biotechnology research institutes, the application combines high-impact bioluminescent visual aesthetics with deep frontend engineering.
 
@@ -14,7 +14,7 @@
 
 ---
 
-## 🏗️ Architecture & Software Design Patterns
+## Architecture & Software Design Patterns
 
 The project follows enterprise frontend software design principles for maximum maintainability, scalability, and clean code separation:
 
@@ -46,14 +46,14 @@ Clear separation between state management/interaction logic and purely aesthetic
 - **Presenters** (`HeroPresenter.tsx`, `TechPipelinePresenter.tsx`, `AboutPresenter.tsx`): Focus strictly on UI rendering, layout composition, and design system tokens.
 
 ### 3. Layout Pattern
-- `MainLayout`: Manages Lenis smooth inertia scroll, accessibility providers, and skip-to-content focus links.
+- `MainLayout`: Manages Lenis smooth inertia scroll and skip-to-content focus links.
 - `SectionLayout`: Standardizes section padding, ambient background light orbs, section badges, and ARIA landmark headings.
 - `ContainerLayout`: Ensures max-width responsive grid boundaries (`max-w-7xl`).
 
 ### 4. Custom Hooks Pattern
 - `useLenis`: Smooth inertia scroll integration.
 - `useReducedMotion`: Detects OS motion settings (`prefers-reduced-motion: reduce`) and disables 3D rotations or heavy particle updates.
-- `useAudioFeedback`: TriggersWeb Audio API procedural sound synthesis for hover, click, splice, and success actions.
+- `useAudioFeedback`: Triggers Web Audio API procedural sound synthesis for hover, click, splice, and success actions.
 
 ### 5. Context API Pattern
 - `AccessibilityContext`: Manages WCAG display preferences (Reduced Motion, High Contrast Mode, Large Typography, Dyslexic-Friendly Font).
@@ -65,7 +65,7 @@ Clear separation between state management/interaction logic and purely aesthetic
 
 ---
 
-## 🎨 Interactive Animation & Visual Features
+## Interactive Animation & Visual Features
 
 1. **3D Interactive DNA Double Helix (`DnaHelixCanvas.tsx`)**:
    - Custom 3D math rendering 28 nucleotide base pairs, hydrogen bond connections, and 120 orbiting bioluminescent particles.
@@ -80,16 +80,16 @@ Clear separation between state management/interaction logic and purely aesthetic
 
 ---
 
-## ♿ WCAG 2.1 Level AA Accessibility
+## WCAG 2.1 Level AA Accessibility Compliance
 
-- **Keyboard Focus Rings**: Custom dual-ring cyan outline (`:focus-visible`) for all interactive buttons, tabs, and links.
+- **Semantic Keyboard Buttons**: All capability cards and tabs are rendered using semantic `<button>` elements with keyboard handlers (`Enter` / `Space`) and cyan focus rings (`:focus-visible`).
 - **Motion Controls**: Respects system `prefers-reduced-motion` and provides a manual toggle in the Accessibility Drawer.
 - **Screen Reader Support**: `aria-live="polite"` regions for gene editor stability updates, `sr-only` descriptions for 3D canvases, and proper `role="dialog"`, `role="tablist"`, `aria-selected` attributes.
 - **High Contrast & Typography Options**: Dedicated accessibility settings drawer for font size scaling and contrast adjustments.
 
 ---
 
-## 🚀 Setup & Local Installation
+## Setup & Local Installation
 
 ### Prerequisites
 - Node.js `v18.0.0` or higher
@@ -112,21 +112,26 @@ Clear separation between state management/interaction logic and purely aesthetic
    ```bash
    npm run dev
    ```
-   Open your browser at `http://localhost:3000`.
+   Open your browser at `http://localhost:3000` (or `http://localhost:5173` depending on port configuration).
 
-4. **Build for production**:
+4. **Automated ESLint Verification**:
+   ```bash
+   npm run lint
+   ```
+
+5. **Build for production**:
    ```bash
    npm run build
    ```
 
-5. **Preview production build**:
+6. **Preview production build**:
    ```bash
    npm run preview
    ```
 
 ---
 
-## 📜 Git Commit History Workflow
+## Git Commit History Workflow
 
 This project was developed incrementally using structured git commits:
 1. `feat(config)`: initialize React Vite TypeScript project with Tailwind CSS and WebGL dependencies
@@ -139,10 +144,13 @@ This project was developed incrementally using structured git commits:
 8. `feat(capabilities-impact)`: add capability grid with glassmorphic glare HOC and animated counter impact metrics
 9. `feat(cta-footer)`: implement bioluminescent particle CTA, status ticker footer, and App component
 10. `docs`: add comprehensive README with architectural documentation and setup instructions
+11. `perf(opt)`: enforce max 100 lines per file, add React.memo, useCallback, useMemo, and React.lazy code splitting
+12. `fix(context)`: wrap App with AccessibilityProvider and SoundProvider at root level in main.tsx
+13. `fix(accessibility-lint-readme)`: add semantic button accessibility for capability cards, ESLint configuration, and fix README encoding & setup ports
 
 ---
 
-## 📝 Submission & Deliverables
+## Submission & Deliverables
 
 - **GitHub Repository**: [Biotech-Animated-Landing-Page](https://github.com/your-username/Biotech-Animated-Landing-Page)
 - **Submission Form**: https://forms.gle/h4cgxChvHhYzzKvZ8

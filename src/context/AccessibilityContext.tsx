@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { AccessibilitySettings } from '../types';
 
-interface AccessibilityContextType {
+export interface AccessibilityContextType {
   settings: AccessibilitySettings;
   toggleReducedMotion: () => void;
   toggleHighContrast: () => void;
@@ -10,14 +10,14 @@ interface AccessibilityContextType {
   resetSettings: () => void;
 }
 
-const defaultSettings: AccessibilitySettings = {
+export const defaultAccessibilitySettings: AccessibilitySettings = {
   reducedMotion: false,
   highContrast: false,
   largeText: false,
   dyslexicFont: false,
 };
 
-const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
+export const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
 
 export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [settings, setSettings] = useState<AccessibilitySettings>(() => {
@@ -25,7 +25,7 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { /* fallback */ }
     }
-    return defaultSettings;
+    return defaultAccessibilitySettings;
   });
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
   const toggleHighContrast = () => setSettings(prev => ({ ...prev, highContrast: !prev.highContrast }));
   const toggleLargeText = () => setSettings(prev => ({ ...prev, largeText: !prev.largeText }));
   const toggleDyslexicFont = () => setSettings(prev => ({ ...prev, dyslexicFont: !prev.dyslexicFont }));
-  const resetSettings = () => setSettings(defaultSettings);
+  const resetSettings = () => setSettings(defaultAccessibilitySettings);
 
   return (
     <AccessibilityContext.Provider
@@ -73,19 +73,4 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
       {children}
     </AccessibilityContext.Provider>
   );
-};
-
-export const useAccessibility = () => {
-  const context = useContext(AccessibilityContext);
-  if (!context) {
-    return {
-      settings: defaultSettings,
-      toggleReducedMotion: () => {},
-      toggleHighContrast: () => {},
-      toggleLargeText: () => {},
-      toggleDyslexicFont: () => {},
-      resetSettings: () => {},
-    };
-  }
-  return context;
 };

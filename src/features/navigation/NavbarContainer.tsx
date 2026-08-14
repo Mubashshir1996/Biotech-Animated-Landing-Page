@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavbarPresenter } from './NavbarPresenter';
-import { useSound } from '../../context/SoundContext';
+import { useSound } from '../../hooks/useSound';
 import { AccessibilityDrawer } from './AccessibilityDrawer';
 
 interface NavbarContainerProps {

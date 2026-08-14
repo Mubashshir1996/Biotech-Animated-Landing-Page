@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
-import { useAccessibility } from '../context/AccessibilityContext';
+import { useAccessibility } from './useAccessibility';
 
 export const useLenis = () => {
   const lenisRef = useRef<Lenis | null>(null);

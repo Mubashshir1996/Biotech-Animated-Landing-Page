@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAccessibility } from '../../context/AccessibilityContext';
+import { useAccessibility } from '../../hooks/useAccessibility';
 import { Modal } from '../../components/ui/Modal';
 import { Eye, Zap, Type, RefreshCw } from 'lucide-react';
 import { Button } from '../../components/ui/Button';

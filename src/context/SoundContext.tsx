@@ -1,16 +1,16 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { SoundSettings } from '../types';
 import { playSynthesizedSound } from '../utils/soundSynth';
 
-interface SoundContextType {
+export interface SoundContextType {
   settings: SoundSettings;
   toggleMute: () => void;
   setVolume: (val: number) => void;
   playSound: (type: 'hover' | 'click' | 'splice' | 'success' | 'tab') => void;
 }
 
-const defaultSoundSettings: SoundSettings = { isMuted: false, volume: 0.15 };
-const SoundContext = createContext<SoundContextType | undefined>(undefined);
+export const defaultSoundSettings: SoundSettings = { isMuted: false, volume: 0.15 };
+export const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [settings, setSettings] = useState<SoundSettings>(() => {
@@ -42,17 +42,4 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       {children}
     </SoundContext.Provider>
   );
-};
-
-export const useSound = () => {
-  const context = useContext(SoundContext);
-  if (!context) {
-    return {
-      settings: defaultSoundSettings,
-      toggleMute: () => {},
-      setVolume: () => {},
-      playSound: () => {},
-    };
-  }
-  return context;
 };

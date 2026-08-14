@@ -1,4 +1,4 @@
-import { useSound } from '../context/SoundContext';
+import { useSound } from './useSound';
 
 export const useAudioFeedback = () => {
   const { playSound } = useSound();
