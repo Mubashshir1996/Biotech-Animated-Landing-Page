@@ -124,12 +124,26 @@ Clear separation between state management/interaction logic and purely aesthetic
    npm run build
    ```
 
-6. **Preview production build**:
+
+7. **Deploy to Vercel**:
    ```bash
-   npm run preview
+   npx vercel
    ```
+   Or connect your GitHub repository directly to [Vercel Dashboard](https://vercel.com/new).
 
 ---
+
+## Vercel Deployment Configuration
+
+The repository includes a pre-configured [`vercel.json`](file:///d:/Practice/Biotech/Biotech-Animated-Landing-Page/vercel.json) file for 1-click zero-config deployment:
+
+- **Framework Preset**: `Vite`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **SPA Rewrites**: `/(.*) -> /index.html` (prevents 404s on page refresh/routing)
+
+---
+
 
 ## Git Commit History Workflow
 
