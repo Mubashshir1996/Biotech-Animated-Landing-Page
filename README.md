@@ -112,7 +112,7 @@ Clear separation between state management/interaction logic and purely aesthetic
    ```bash
    npm run dev
    ```
-   Open your browser at `http://localhost:3000` (or `http://localhost:5173` depending on port configuration).
+   Open your browser at `http://localhost:5173`.
 
 4. **Automated ESLint Verification**:
    ```bash
